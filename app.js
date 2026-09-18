@@ -31,8 +31,13 @@ function saveStats(stats) {
 function trackVisit() {
   const stats = readStats();
   const browser = /Edg/i.test(navigator.userAgent) ? "Edge" : /Chrome/i.test(navigator.userAgent) ? "Chrome" : /Firefox/i.test(navigator.userAgent) ? "Firefox" : /Safari/i.test(navigator.userAgent) ? "Safari" : "متصفح آخر";
+  const device = /Mobi|Android/i.test(navigator.userAgent) ? "هاتف" : /Tablet|iPad/i.test(navigator.userAgent) ? "جهاز لوحي" : "حاسوب";
+  const operatingSystem = /Windows/i.test(navigator.userAgent) ? "Windows" : /Mac OS/i.test(navigator.userAgent) ? "macOS" : /Android/i.test(navigator.userAgent) ? "Android" : /iPhone|iPad/i.test(navigator.userAgent) ? "iOS" : /Linux/i.test(navigator.userAgent) ? "Linux" : "غير معروف";
   stats.visits += 1;
   stats.browsers[browser] = (stats.browsers[browser] || 0) + 1;
+  stats.visitors = stats.visitors || [];
+  stats.visitors.unshift({ time: new Date().toISOString(), browser, device, operatingSystem, language: navigator.language, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, screen: `${screen.width} × ${screen.height}`, referrer: document.referrer || "دخول مباشر" });
+  stats.visitors = stats.visitors.slice(0, 200);
   saveStats(stats);
 }
 
