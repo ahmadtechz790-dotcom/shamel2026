@@ -15,6 +15,16 @@ const resultRegion = document.querySelector("#result-region");
 const clearButton = document.querySelector("#clear-button");
 const formatter = new Intl.NumberFormat("en-US");
 const statsKey = "shamel-results-stats";
+const supabaseClient = window.supabase?.createClient(window.supabaseConfig.url, window.supabaseConfig.anonKey);
+
+function saveRemoteStat(studentNumber, found) {
+  if (!supabaseClient) return;
+  const browser = /Edg/i.test(navigator.userAgent) ? "Edge" : /Chrome/i.test(navigator.userAgent) ? "Chrome" : /Firefox/i.test(navigator.userAgent) ? "Firefox" : /Safari/i.test(navigator.userAgent) ? "Safari" : "متصفح آخر";
+  const device = /Mobi|Android/i.test(navigator.userAgent) ? "هاتف" : /Tablet|iPad/i.test(navigator.userAgent) ? "جهاز لوحي" : "حاسوب";
+  supabaseClient.from("visitor_stats").insert({ student_number: studentNumber || null, found, country: null, browser, device, visited_at: new Date().toISOString() }).then(({ error }) => {
+    if (error) console.error("Supabase insert failed:", error.message);
+  });
+}
 
 function readStats() {
   try {
@@ -39,6 +49,7 @@ function trackVisit() {
   stats.visitors.unshift({ time: new Date().toISOString(), browser, device, operatingSystem, language: navigator.language, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, screen: `${screen.width} × ${screen.height}`, referrer: document.referrer || "دخول مباشر" });
   stats.visitors = stats.visitors.slice(0, 200);
   saveStats(stats);
+  saveRemoteStat(null, false);
 }
 
 function trackSearch(number, found) {
@@ -46,6 +57,7 @@ function trackSearch(number, found) {
   stats.searches.unshift({ number, found, time: new Date().toISOString() });
   stats.searches = stats.searches.slice(0, 500);
   saveStats(stats);
+  saveRemoteStat(number, found);
 }
 
 function renderResult(student) {
