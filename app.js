@@ -14,6 +14,34 @@ const input = document.querySelector("#student-number");
 const resultRegion = document.querySelector("#result-region");
 const clearButton = document.querySelector("#clear-button");
 const formatter = new Intl.NumberFormat("en-US");
+const statsKey = "shamel-results-stats";
+
+function readStats() {
+  try {
+    return JSON.parse(localStorage.getItem(statsKey)) || { visits: 0, searches: [], browsers: {} };
+  } catch {
+    return { visits: 0, searches: [], browsers: {} };
+  }
+}
+
+function saveStats(stats) {
+  localStorage.setItem(statsKey, JSON.stringify(stats));
+}
+
+function trackVisit() {
+  const stats = readStats();
+  const browser = /Edg/i.test(navigator.userAgent) ? "Edge" : /Chrome/i.test(navigator.userAgent) ? "Chrome" : /Firefox/i.test(navigator.userAgent) ? "Firefox" : /Safari/i.test(navigator.userAgent) ? "Safari" : "متصفح آخر";
+  stats.visits += 1;
+  stats.browsers[browser] = (stats.browsers[browser] || 0) + 1;
+  saveStats(stats);
+}
+
+function trackSearch(number, found) {
+  const stats = readStats();
+  stats.searches.unshift({ number, found, time: new Date().toISOString() });
+  stats.searches = stats.searches.slice(0, 500);
+  saveStats(stats);
+}
 
 function renderResult(student) {
   if (!student) {
@@ -38,8 +66,11 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   const number = input.value.replace(/\D/g, "");
   input.value = number;
-  renderResult(students.find((student) => student.number === number));
+  const student = students.find((item) => item.number === number);
+  trackSearch(number, Boolean(student));
+  renderResult(student);
 });
 
 input.addEventListener("input", () => { clearButton.hidden = input.value.length === 0; });
 clearButton.addEventListener("click", () => { input.value = ""; clearButton.hidden = true; input.focus(); });
+trackVisit();
