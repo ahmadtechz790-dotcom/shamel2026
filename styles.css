@@ -49,7 +49,7 @@ input::placeholder { color: #a2afb2; font-family: "IBM Plex Sans Arabic", sans-s
 .search-button:hover { background: var(--teal-dark); transform: translateY(-2px); }
 .search-button b { font: 25px Arial, sans-serif; }
 .search-card p { margin: 9px 3px 0; color: #95a4a7; font-size: 12px; }
-.result-region { margin-top: 24px; }
+.result-region { width: min(650px, 100%); margin: 30px auto 0; }
 .empty-state { padding: 25px; border: 1px dashed #cbdcdb; border-radius: 14px; color: var(--muted); background: rgba(255, 255, 255, .55); }
 .empty-icon { display: block; margin: auto; width: 30px; color: var(--teal); font: 25px Arial, sans-serif; transform: rotate(90deg); }
 .empty-state p { margin: 7px 0 1px; color: var(--ink); font-weight: 600; }
@@ -58,7 +58,7 @@ input::placeholder { color: #a2afb2; font-family: "IBM Plex Sans Arabic", sans-s
 .result-head { display: flex; align-items: center; justify-content: space-between; padding: 22px 25px; color: var(--white); background: var(--navy); }
 .result-head h2 { margin: 0; font-size: 19px; font-weight: 600; }
 .result-head small { color: #adc3ca; font-size: 12px; }
-.score { display: flex; align-items: baseline; gap: 6px; padding: 23px 27px; background: #eaf7f5; }
+.score { display: flex; align-items: baseline; justify-content: center; gap: 8px; padding: 27px; background: #eaf7f5; text-align: center; }
 .score strong { color: var(--teal-dark); font: 700 55px/1 "Space Grotesk", sans-serif; letter-spacing: -2px; }
 .score span { color: #6a888c; font-size: 14px; }
 .student-block { padding: 22px 25px 9px; }
@@ -72,6 +72,9 @@ input::placeholder { color: #a2afb2; font-family: "IBM Plex Sans Arabic", sans-s
 .grade span { display: block; color: #89999b; font-size: 12px; }
 .grade strong { color: var(--navy); font-size: 17px; }
 .missing { color: #a5b0b1 !important; font-size: 13px !important; }
+.marks-note { margin: 0 25px 25px; padding: 16px 18px; color: #496267; background: #f8fbfa; border: 1px solid #e0ebea; border-radius: 10px; font-size: 12px; line-height: 1.8; }
+.marks-note strong { display: block; margin-bottom: 4px; color: var(--navy); font-size: 13px; }
+.marks-note span { color: var(--teal-dark); font-weight: 600; }
 .not-found { padding: 24px; color: #7a5d35; background: #fff8eb; border: 1px solid #f3dfb9; border-radius: 14px; }
 .not-found strong { display: block; color: #604722; font-size: 17px; }
 .not-found span { display: block; margin-top: 4px; font-size: 13px; }
@@ -92,6 +95,7 @@ input::placeholder { color: #a2afb2; font-family: "IBM Plex Sans Arabic", sans-s
   .student-block { padding: 19px 18px 9px; }
   .student-name { font-size: 21px; }
   .grades { padding: 0 18px 19px; gap: 3px; }
+  .marks-note { margin: 0 18px 19px; }
   .grade strong { font-size: 15px; }
   .status-pill { font-size: 11px; }
 }

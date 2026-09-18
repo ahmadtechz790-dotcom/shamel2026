@@ -13,7 +13,7 @@ const form = document.querySelector("#search-form");
 const input = document.querySelector("#student-number");
 const resultRegion = document.querySelector("#result-region");
 const clearButton = document.querySelector("#clear-button");
-const formatter = new Intl.NumberFormat("ar-EG");
+const formatter = new Intl.NumberFormat("en-US");
 
 function renderResult(student) {
   if (!student) {
@@ -24,13 +24,14 @@ function renderResult(student) {
   const grades = student.grades
     ? student.grades.map((grade, index) => `<div class="grade"><span>س${index + 1}</span><strong>${formatter.format(grade)}</strong></div>`).join("")
     : Array.from({ length: 5 }, (_, index) => `<div class="grade"><span>س${index + 1}</span><strong class="missing">—</strong></div>`).join("");
-  const score = student.total === null ? `<strong class="missing">غير متوفر</strong><span>النتيجة النهائية</span>` : `<strong>${formatter.format(student.total)}</strong><span>من 100</span>`;
+  const score = student.total === null ? `<strong class="missing">غير متوفر</strong><span>النتيجة النهائية</span>` : `<strong>${formatter.format(student.total)}</strong><span>المجموع النهائي</span>`;
 
   resultRegion.innerHTML = `<article class="result-card">
     <div class="result-head"><h2>تفاصيل الطالب</h2><small>رقم جامعي: ${student.number}</small></div>
     <div class="score">${score}</div>
     <div class="student-block"><h3 class="student-name">${student.name}</h3><div class="student-meta"><div class="meta-item"><span>الرقم الجامعي</span><strong>${student.number}</strong></div><div class="meta-item"><span>التخصص</span><strong>${student.major}</strong></div></div></div>
     <div class="grades">${grades}</div>
+    <div class="marks-note"><strong>ملاحظة توزيع العلامات</strong><span>س1:</span> برنامج وورد ودمج المراسلات (25) &nbsp; <span>س2:</span> برنامج الإكسل (25) &nbsp; <span>س3:</span> برنامج بوربوينت (25) &nbsp; <span>س4:</span> مراسلات تجارية (15) &nbsp; <span>س5:</span> الطباعة باللغة العربية واللغة الإنجليزية (10)</div>
   </article>`;
 }
 
