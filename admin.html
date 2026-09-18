@@ -12,11 +12,11 @@
   <body>
     <main class="dashboard">
       <header class="dashboard-header"><div><span class="eyebrow">لوحة المتابعة</span><h1>إحصائيات بوابة النتائج</h1><p>ملخص عمليات البحث المسجلة على هذا المتصفح.</p></div><a href="index.html">العودة للبوابة ←</a></header>
-      <div class="notice"><strong>تنبيه:</strong> هذه الإحصائيات محفوظة محليًا في المتصفح الحالي. للحصول على إحصائيات جميع الزوار نحتاج ربط قاعدة بيانات أو خدمة تحليلات.</div>
+      <div class="notice"><strong>الحالة:</strong> الإحصائيات محفوظة في Supabase، ويظهر IP والبلد إذا سمحت خدمة التعرف المجانية بذلك.</div>
       <section class="metrics" aria-label="ملخص الإحصائيات"><article><span>زيارات الصفحة</span><strong id="visits">0</strong></article><article><span>عمليات البحث</span><strong id="searches">0</strong></article><article><span>نتائج صحيحة</span><strong id="found">0</strong></article><article><span>أرقام مختلفة</span><strong id="unique">0</strong></article></section>
       <section class="grid"><article class="panel"><div class="panel-heading"><h2>الأرقام التي تم إدخالها</h2><button id="clear-stats" type="button">مسح السجل</button></div><div id="numbers" class="number-list"></div></article><article class="panel"><div class="panel-heading"><h2>المتصفحات</h2></div><div id="browsers" class="browser-list"></div></article></section>
       <section class="panel recent"><div class="panel-heading"><h2>آخر عمليات البحث</h2></div><div id="recent" class="recent-list"></div></section>
-      <section class="panel visitor-panel"><div class="panel-heading"><h2>معلومات الزوار المتاحة محليًا</h2><small>بدون IP أو خدمة خارجية</small></div><div id="visitors" class="visitor-list"></div></section>
+      <section class="panel visitor-panel"><div class="panel-heading"><h2>معلومات الزوار</h2><small>الجهاز والمتصفح وIP والبلد</small></div><div id="visitors" class="visitor-list"></div></section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>

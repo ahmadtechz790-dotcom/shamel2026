@@ -17,13 +17,24 @@ const formatter = new Intl.NumberFormat("en-US");
 const statsKey = "shamel-results-stats";
 const supabaseClient = window.supabase?.createClient(window.supabaseConfig.url, window.supabaseConfig.anonKey);
 
-function saveRemoteStat(studentNumber, found) {
+async function saveRemoteStat(studentNumber, found) {
   if (!supabaseClient) return;
   const browser = /Edg/i.test(navigator.userAgent) ? "Edge" : /Chrome/i.test(navigator.userAgent) ? "Chrome" : /Firefox/i.test(navigator.userAgent) ? "Firefox" : /Safari/i.test(navigator.userAgent) ? "Safari" : "متصفح آخر";
   const device = /Mobi|Android/i.test(navigator.userAgent) ? "هاتف" : /Tablet|iPad/i.test(navigator.userAgent) ? "جهاز لوحي" : "حاسوب";
-  supabaseClient.from("visitor_stats").insert({ student_number: studentNumber || null, found, country: null, browser, device, visited_at: new Date().toISOString() }).then(({ error }) => {
-    if (error) console.error("Supabase insert failed:", error.message);
-  });
+  let ip = null;
+  let country = null;
+  try {
+    const response = await fetch("https://ipapi.co/json/");
+    if (response.ok) {
+      const visitor = await response.json();
+      ip = visitor.ip || null;
+      country = visitor.country_name || visitor.country || null;
+    }
+  } catch {
+    // The visit is still saved if the optional IP lookup is unavailable.
+  }
+  const { error } = await supabaseClient.from("visitor_stats").insert({ student_number: studentNumber || null, found, ip, country, browser, device, visited_at: new Date().toISOString() });
+  if (error) console.error("Supabase insert failed:", error.message);
 }
 
 function readStats() {
