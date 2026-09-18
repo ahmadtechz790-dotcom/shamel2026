@@ -24,7 +24,7 @@ function renderResult(student) {
   const grades = student.grades
     ? student.grades.map((grade, index) => `<div class="grade"><span>س${index + 1}</span><strong>${formatter.format(grade)}</strong></div>`).join("")
     : Array.from({ length: 5 }, (_, index) => `<div class="grade"><span>س${index + 1}</span><strong class="missing">—</strong></div>`).join("");
-  const score = student.total === null ? `<strong class="missing">غير متوفر</strong><span>النتيجة النهائية</span>` : `<strong>${formatter.format(student.total)}</strong>`;
+  const score = student.total === null ? `<strong class="missing">غير متوفر</strong>` : `<strong>${formatter.format(student.total)}</strong>`;
 
   resultRegion.innerHTML = `<article class="result-card">
     <div class="score">${score}</div>
