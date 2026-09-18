@@ -27,9 +27,8 @@ function renderResult(student) {
   const score = student.total === null ? `<strong class="missing">غير متوفر</strong><span>النتيجة النهائية</span>` : `<strong>${formatter.format(student.total)}</strong><span>المجموع النهائي</span>`;
 
   resultRegion.innerHTML = `<article class="result-card">
-    <div class="result-head"><h2>تفاصيل الطالب</h2><small>رقم جامعي: ${student.number}</small></div>
     <div class="score">${score}</div>
-    <div class="student-block"><h3 class="student-name">${student.name}</h3><div class="student-meta"><div class="meta-item"><span>الرقم الجامعي</span><strong>${student.number}</strong></div><div class="meta-item"><span>التخصص</span><strong>${student.major}</strong></div></div></div>
+    <div class="student-block"><h2 class="details-title">تفاصيل الطالب</h2><h3 class="student-name">${student.name}</h3><div class="student-meta"><div class="meta-item"><span>الرقم الجامعي</span><strong>${student.number}</strong></div><div class="meta-item"><span>التخصص</span><strong>${student.major}</strong></div></div></div>
     <div class="grades">${grades}</div>
     <div class="marks-note"><strong>ملاحظة توزيع العلامات</strong><span>س1:</span> برنامج وورد ودمج المراسلات (25) &nbsp; <span>س2:</span> برنامج الإكسل (25) &nbsp; <span>س3:</span> برنامج بوربوينت (25) &nbsp; <span>س4:</span> مراسلات تجارية (15) &nbsp; <span>س5:</span> الطباعة باللغة العربية واللغة الإنجليزية (10)</div>
   </article>`;

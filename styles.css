@@ -61,7 +61,8 @@ input::placeholder { color: #a2afb2; font-family: "IBM Plex Sans Arabic", sans-s
 .score { display: flex; align-items: baseline; justify-content: center; gap: 8px; padding: 27px; background: #eaf7f5; text-align: center; }
 .score strong { color: var(--teal-dark); font: 700 55px/1 "Space Grotesk", sans-serif; letter-spacing: -2px; }
 .score span { color: #6a888c; font-size: 14px; }
-.student-block { padding: 22px 25px 9px; }
+.student-block { padding: 22px 25px 9px; border-top: 1px solid #e7efee; }
+.details-title { margin: 0 0 17px; color: var(--teal-dark); font-size: 15px; font-weight: 700; }
 .student-name { margin: 0 0 17px; color: var(--navy); font-size: 25px; font-weight: 700; }
 .student-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding-bottom: 10px; }
 .meta-item { padding: 13px 15px; background: #f7faf9; border-radius: 9px; }
